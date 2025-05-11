@@ -1,0 +1,79 @@
+{% extends "./base.html" %}
+{% load static %}
+{% block content %}
+
+
+
+<body>
+    <script>
+        $(document).ready(function () {
+            $("#bigAvengerName").text('{{ myavenger.name }}')
+            if ("null" === '{{form.data.disable_save}}') {
+                $("#submitButton").removeAttr("disabled")
+            }
+
+            $("#avenger_name").change(function () {
+
+
+                $("#bigAvengerName").text($("#avenger_name").val())
+            })
+
+            $("#submitButton").click(function (e) {
+
+
+                var deleteConfirmed = confirm("Are you sure you would like to delete this avenger?")
+
+                if (!deleteConfirmed) {
+                    e.preventDefault();
+                    console.log("Delete canceled")
+                }
+                else{
+                    console.log("Delete Confirmed")
+                    $("#deleteForm").submit();
+                }
+            })
+        });
+    </script>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <h6>Delete</h6>
+                <h6 id="bigAvengerName"></h6>
+                <h5 class="display-4 text-danger">{{ form.data.error }}</h4>
+            </div>
+            <div class="col-md-8">
+                <form id="deleteForm" method="POST" class="p-3 border rounded shadow-sm bg-light">
+                    {% csrf_token %}
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label for="avenger_name" class="form-label">Avenger Name</label>
+                            <input type="text" id="avenger_name" value="{{form.data.avenger_name}}" class="form-control"
+                                required="required" readonly="readonly" name="avenger_name">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="avenger_id" class="form-label">Avenger ID</label>
+                            <input type="text" id="avenger_id" readonly="readonly" class="form-control"
+                                value="{{form.data.avenger_id}}" name="avenger_id">
+                        </div>
+                    </div>
+
+                    <button id="submitButton" type="button" disabled="{{form.data.disable_save}}"
+                        class="btn btn-danger mt-3">Delete</button>
+                    <p class="text-danger">{{ form.data.hint_text }}</p>
+                    {% if form.data.disable_save == "disabled" %}
+                    <a class="btn btn-primary" href="{% url 'heroes:new'  %}">Add a New Avenger Instead</a>
+                    {% endif %}
+                </form>
+
+                <p class="mt-3 text-info">
+                    Back to <a class="btn btn-primary" href="{% url 'heroes:Landing' %}">List of Avengers</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+{% endblock content %}

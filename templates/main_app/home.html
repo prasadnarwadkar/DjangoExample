@@ -1,0 +1,34 @@
+{% extends "./base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        My Own Avengers
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <p class="text-info"><a class="btn btn-primary" href="{% url 'heroes:new'  %}">Add a New Avenger</a></p>
+        </div>
+        <div class="col-md-8">
+            <table class="table-striped">
+                <thead>
+                    <th>Name</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    {% for avenger in avengers %}
+                    <tr>
+
+                        <td><a href="{% url 'heroes:Avenger-details' avenger.id %}">{{avenger.name}}</a><a
+                                style="visibility:hidden" href="{% url 'heroes:Avenger-details' avenger.id %}">{{
+                                avenger.name }}</a></td>
+                        <td><a class="btn btn-danger" href="{% url 'heroes:Avenger-delete' avenger.id %}">Delete</a></td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}
