@@ -11,4 +11,7 @@
 - Uses basic support for auth using the `django.contrib.auth` and `accounts` apps.
 ## Sqlite3 Reader
 - Reads Sqlite3 Db file which you can point to using file chooser dialog. Accepted file extension is `.sqlit3`.
-- Displays all the tables and their data in a grid. 
+- Displays all the tables and their data in a grid.
+
+# Docker support
+- Use the `dockerfile` to create an image and a container from the image. This will run the Django app in a container. 
