@@ -12,6 +12,7 @@
 ## Sqlite3 Reader
 - Reads Sqlite3 Db file which you can point to using file chooser dialog. Accepted file extension is `.sqlit3`.
 - Displays all the tables and their data in a grid.
+- Create a blank Sqlite3 DB. Run `python manage.py makemigrations` and `python manage.py migrate` as necessary to ensure models are reflected in the Sqlite3 DB.
 
 # Docker support
 - Use the `dockerfile` to create an image and a container from the image. This will run the Django app in a container. 
