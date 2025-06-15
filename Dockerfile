@@ -1,14 +1,13 @@
-FROM python:3.13
-
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-    && rm -rf /var/lib/apt/lists/*
+FROM python:3.13-slim
 
 WORKDIR /usr/src/app
+
+# Install dependencies in a single step to reduce layers
 COPY requirements.txt ./
-RUN pip install -r requirements.txt
-RUN ["apt-get", "update"]
-RUN ["apt-get", "install", "-y", "vim"]
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Remove unnecessary apt-get installs and updates
+# If vim is required, consider using a lightweight alternative or installing it only in a separate build stage
 COPY . .
 
 EXPOSE 8000

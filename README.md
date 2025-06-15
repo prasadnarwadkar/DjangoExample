@@ -16,3 +16,5 @@
 
 # Docker support
 - Use the `dockerfile` to create an image and a container from the image. This will run the Django app in a container. 
+- `docker build -t prasadnarwadkar/djangoapp . --no-cache`
+- `docker run --env=PATH=/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=GPG_KEY=7169605F62C751356D054A26A821E680E5FA6305 --env=PYTHON_VERSION=3.13.3 --env=PYTHON_SHA256=40f868bcbdeb8149a3149580bb9bfd407b3321cd48f0be631af955ac92c0e041 --network=bridge --workdir=/usr/src/app -p 8003:8000 --restart=no --runtime=runc -d prasadnarwadkar/djangoapp:latest`
